@@ -19,18 +19,18 @@ public class GameManager : MonoBehaviour
     [Header("Card Prefab & Transform")]
     [SerializeField] private GameObject _cardPrefab;
     [SerializeField] private float _cellPadding;
-    private Dictionary<string, Card> _spawnedCards;
+    private Dictionary<int, Card> _spawnedCards;
     [Space(14)]
     [Header("Card Prefab & Transform")]
     [SerializeField] private GridLayoutGroup _cardGrid;
 
-    [Header("LeanTween Effects & Events")]
+    [Header("Tween Effects & Events")]
     public UnityEvent CardSpawnIn;
     public UnityEvent CardSpawnOut;
-    [SerializeField] private LeanTweenEffect PointerEnterEffect;
-    [SerializeField] private LeanTweenEffect PointerExitEffect;
-    [SerializeField] private LeanTweenEffect ClickEffect;
-    [SerializeField] private LeanTweenEffect SpawnInEffect;
+    [SerializeField] private TweenEffect PointerEnterEffect;
+    [SerializeField] private TweenEffect PointerExitEffect;
+    [SerializeField] private TweenEffect ClickEffect;
+    [SerializeField] private TweenEffect SpawnInEffect;
     #endregion
     #region Debugging Items & Variables
     [Space(14)]
@@ -38,7 +38,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int _totalCards;
     [SerializeField] private int _rows;
     [SerializeField] private int _columns;
-    [SerializeField] private float _cellSizeRatio = 0.3f; // Adjust this value as needed
 
     [SerializeField] private List<Card> _Cards;
     public List<Card> Cards => _Cards;
@@ -77,7 +76,7 @@ public class GameManager : MonoBehaviour
     [Serializable]
     public struct Card
     {
-        public string Id;
+        public int Id;
         public Vector2 GridPosition;
         public bool IsMine;
         public bool Matched;
@@ -88,9 +87,9 @@ public class GameManager : MonoBehaviour
     }
 
     [Serializable]
-    public struct LeanTweenEffect
+    public struct TweenEffect
     {
-        public LeanTweenType SelectedEffect;
+        public AnimationCurve SelectedEffect;
         public float Delay;
         public Vector3 SetScale;
         public AudioClip EffectClip;
@@ -126,7 +125,7 @@ public class GameManager : MonoBehaviour
         }
 
         // Spawn cards
-        _spawnedCards = new Dictionary<string, Card>();
+        _spawnedCards = new Dictionary<int, Card>();
         int cardIndex = 0;
         for (int row = 0; row < _rows; row++)
         {
@@ -138,7 +137,7 @@ public class GameManager : MonoBehaviour
                 cardRectTransform.localScale = Vector3.zero; // Set local scale to zero
                 Card card = new Card
                 {
-                    Id = cardIndex.ToString(),
+                    Id = cardIndex,
                     IsMine = false,
                     Matched = false,
                     CardObject = cardGameObject,
@@ -159,7 +158,7 @@ public class GameManager : MonoBehaviour
         {
             for (int i = 0; i < _totalCards; i++)
             {
-                _spawnedCards[i.ToString()] = cards[i];
+                _spawnedCards[i] = cards[i];
             }
         }
 
@@ -189,8 +188,9 @@ public class GameManager : MonoBehaviour
 
         foreach (Card card in _spawnedCards.Values)
         {
-            card.CardRectTransform.localScale = Vector3.one;
-            LeanTween.scale(card.CardObject, SpawnInEffect.SetScale, SpawnInEffect.Delay).setEase(SpawnInEffect.SelectedEffect);
+            yield return new WaitForSeconds(0.05f);
+            Debug.Log(card.Id);
+            StartCoroutine(ScaleWithCurve(card.CardObject.transform, SpawnInEffect.SetScale, SpawnInEffect.SelectedEffect, SpawnInEffect.Delay));
         }
     }
 
@@ -199,11 +199,8 @@ public class GameManager : MonoBehaviour
         // Calculate cell size based on grid dimensions
         float cellSizeX = (_cardGrid.GetComponent<RectTransform>().rect.width / _columns) + _cellPadding;
         float cellSizeY = (_cardGrid.GetComponent<RectTransform>().rect.height / _rows) + _cellPadding;
-        Debug.Log(cellSizeX);
-        Debug.Log(cellSizeY);
         // Use the smaller dimension as the cell size
         float cellSize = Mathf.Min(cellSizeX, cellSizeY);
-        Debug.Log(cellSize);
         // Ensure cell size is valid
         if (cellSize <= 0f)
         {
@@ -233,7 +230,7 @@ public class GameManager : MonoBehaviour
         }
     }
     #endregion
-    #region Triggers
+    #region Triggers & Scaling Curve
     private void AddEventTriggers(Card card)
     {
         EventTrigger trigger = card.EventTrigger;
@@ -262,16 +259,35 @@ public class GameManager : MonoBehaviour
     }
     private void OnPointerEnter(Card card)
     {
-        // Implement pointer enter logic
-
+        StartCoroutine(ScaleWithCurve(card.CardObject.transform, PointerEnterEffect.SetScale, PointerEnterEffect.SelectedEffect, PointerEnterEffect.Delay));
     }
+
     private void OnPointerExit(Card card)
     {
-        // Implement pointer exit logic
+        StartCoroutine(ScaleWithCurve(card.CardObject.transform, PointerExitEffect.SetScale, PointerExitEffect.SelectedEffect, PointerExitEffect.Delay));
     }
+
     private void OnPointerClick(Card card)
     {
-        // Implement pointer click logic
+        StartCoroutine(ScaleWithCurve(card.CardObject.transform, ClickEffect.SetScale, ClickEffect.SelectedEffect, ClickEffect.Delay));
     }
+    private IEnumerator ScaleWithCurve(Transform targetTransform, Vector3 targetScale, AnimationCurve curve, float duration)
+    {
+        float timeElapsed = 0f;
+        Vector3 initialScale = targetTransform.localScale;
+
+        while (timeElapsed < duration)
+        {
+            float t = timeElapsed / duration;
+            float curveValue = curve.Evaluate(t);
+            targetTransform.localScale = Vector3.Lerp(initialScale, targetScale, curveValue);
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        // Ensure the target scale is set correctly at the end
+        targetTransform.localScale = targetScale;
+    }
+
     #endregion
 }

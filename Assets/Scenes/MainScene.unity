@@ -1249,6 +1249,7 @@ MonoBehaviour:
   - {r: 0.3490566, g: 0.3490566, b: 0.3490566, a: 0}
   - {r: 0, g: 0, b: 0, a: 0}
   _cardPrefab: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
+  _cellPadding: 0
   _cardGrid: {fileID: 593341735}
   CardSpawnIn:
     m_PersistentCalls:
@@ -1257,29 +1258,120 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   PointerEnterEffect:
-    SelectedEffect: 1
-    Delay: 0.5
-    SetScale: {x: 1.2, y: 1.2, z: 0}
+    SelectedEffect:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    Delay: 0.3
+    SetScale: {x: 1.05, y: 1.05, z: 1.05}
     EffectClip: {fileID: 0}
   PointerExitEffect:
-    SelectedEffect: 17
-    Delay: 0.5
-    SetScale: {x: 1.2, y: 1.2, z: 0}
+    SelectedEffect:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    Delay: 0.3
+    SetScale: {x: 1, y: 1, z: 1}
     EffectClip: {fileID: 0}
   ClickEffect:
-    SelectedEffect: 22
+    SelectedEffect:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
     Delay: 0.5
-    SetScale: {x: 1.5, y: 1.5, z: 0}
+    SetScale: {x: 1.1, y: 1.1, z: 1.1}
     EffectClip: {fileID: 0}
   SpawnInEffect:
-    SelectedEffect: 16
-    Delay: 0.5
+    SelectedEffect:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    Delay: 1
     SetScale: {x: 1, y: 1, z: 1}
     EffectClip: {fileID: 0}
   _totalCards: 0
   _rows: 0
   _columns: 0
-  _cellSizeRatio: 0.3
   _Cards: []
   _selectedCards: []
   _matchedCards: []
