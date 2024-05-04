@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     [Header("Card Prefab & Transform")]
     [SerializeField] private GameObject _cardPrefab;
     [SerializeField] private float _cellPadding;
-    private Dictionary<int, Card> _spawnedCards;
+    private Dictionary<int, CardItem> _spawnedCards;
     [Space(14)]
     [Header("Card Prefab & Transform")]
     [SerializeField] private GridLayoutGroup _cardGrid;
@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TweenEffect ClickEffect;
     [SerializeField] private TweenEffect SpawnInEffect;
     [SerializeField] private TweenEffect MatchEffect;
+    [SerializeField] private TweenEffect FlipEffect;
     #endregion
     #region Debugging Items & Variables
     [Space(14)]
@@ -42,12 +43,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int _rows;
     [SerializeField] private int _columns;
     private AnimationManager _animationManager;
-    [SerializeField] private List<Card> _Cards;
-    public List<Card> Cards => _Cards;
-    [SerializeField] private List<Card> _selectedCards;
-    public List<Card> SelectedCards => _selectedCards;
-    [SerializeField] private List<Card> _matchedCards;
-    public List<Card> MatchedCards => _matchedCards;
+    [SerializeField] private List<CardItem> _cards;
+    public List<CardItem> Cards => _cards;
+    [SerializeField] private List<CardItem> _selectedCards;
+    public List<CardItem> SelectedCards => _selectedCards;
+    [SerializeField] private List<CardItem> _matchedCards;
+    public List<CardItem> MatchedCards => _matchedCards;
     #endregion
     #region Game Enums
     public enum GameModes
@@ -58,7 +59,6 @@ public class GameManager : MonoBehaviour
         TimeBased = 3,
         MineSweeper = 4,
     }
-
     public enum GameDifficulties
     {
         None = 0,
@@ -68,7 +68,6 @@ public class GameManager : MonoBehaviour
         Hard = 4,
         Extreme = 5,
     }
-
     [Serializable]
     public struct GridSize
     {
@@ -76,21 +75,8 @@ public class GameManager : MonoBehaviour
         public int Columns;
     }
 
-    [Serializable]
-    public struct Card
-    {
-        public int Id;
-        public Vector2 GridPosition;
-        public bool IsMine;
-        public bool IsClicked;
-        public bool Matched;
-        public Image CardImage;
-        public RectTransform CardRectTransform;
-        public EventTrigger EventTrigger;
-        public GameObject CardObject;
-    }
-
     #endregion
+    #region Instance
     private static GameManager _instance;
     public static GameManager Instance
     {
@@ -104,6 +90,7 @@ public class GameManager : MonoBehaviour
             return _instance;
         }
     }
+    #endregion
     void Start()
     {
         _animationManager = AnimationManager.Instance;
@@ -119,7 +106,7 @@ public class GameManager : MonoBehaviour
     }
 
 #nullable enable
-    private IEnumerator SetupGrid(GameModes gameMode, GameDifficulties gameDifficulty, List<Card>? cards = null)
+    private IEnumerator SetupGrid(GameModes gameMode, GameDifficulties gameDifficulty, List<CardItem>? cards = null)
     {
         _cardGrid.enabled = true;
         GridSize gridSize = GetGridSize(gameDifficulty);
@@ -127,7 +114,7 @@ public class GameManager : MonoBehaviour
         _columns = gridSize.Columns;
 
         int allowedColors = (_rows * _columns) / 2;
-        // use AvalableColors to get and set the colors, and there should only be two matchinc colors
+        // use AvailableColors to get and set the colors, and there should only be two matching colors
 
         _totalCards = _rows * _columns;
 
@@ -138,7 +125,7 @@ public class GameManager : MonoBehaviour
         }
 
         // Spawn cards
-        _spawnedCards = new Dictionary<int, Card>();
+        _spawnedCards = new Dictionary<int, CardItem>();
         int cardIndex = 0;
         for (int row = 0; row < _rows; row++)
         {
@@ -148,18 +135,19 @@ public class GameManager : MonoBehaviour
                 GameObject cardGameObject = Instantiate(_cardPrefab, _cardGrid.transform);
                 RectTransform cardRectTransform = cardGameObject.GetComponent<RectTransform>();
                 cardRectTransform.localScale = Vector3.zero; // Set local scale to zero
-                Card card = new Card
-                {
-                    Id = cardIndex,
-                    IsMine = false,
-                    Matched = false,
-                    CardObject = cardGameObject,
-                    CardImage = cardGameObject.transform.GetChild(0).GetChild(0).GetComponent<Image>(),
-                    CardRectTransform = cardRectTransform,
-                    EventTrigger = cardGameObject.GetComponent<EventTrigger>(),
-                    GridPosition = new Vector2(row, col)
-                };
+                CardItem card = cardGameObject.GetComponent<CardItem>();
+                card.Id = cardIndex;
+                card.IsMine = false;
+                card.Hidden = false;
+                card.HasMatched = false;
+                card.CardObject = cardGameObject;
+                card.CardImage = cardGameObject.transform.GetChild(0).GetChild(1).GetChild(0).GetComponent<Image>();
+                card.CardRectTransform = cardRectTransform;
+                card.EventTrigger = cardGameObject.GetComponent<EventTrigger>();
+                card.GridPosition = new Vector2(row, col);
+                card.AnimationManager = _animationManager;
                 _spawnedCards.Add(card.Id, card);
+                _cards.Add(card);
                 AddEventTriggers(card);
 
                 cardIndex++;
@@ -195,13 +183,12 @@ public class GameManager : MonoBehaviour
         }
         yield return new WaitForSeconds(0.03f);
     }
-
     private IEnumerator StartGame()
     {
 
         yield return new WaitForSeconds(SpawnInEffect.Delay);
 
-        foreach (Card card in _spawnedCards.Values)
+        foreach (CardItem card in _spawnedCards.Values)
         {
             yield return new WaitForSeconds(0.01f);
 
@@ -209,7 +196,7 @@ public class GameManager : MonoBehaviour
             AnimationCurve curve = _animationManager.GetAnimationCurve(SpawnInEffect.SelectedEffect);
             if (curve != null)
             {
-                StartCoroutine(ScaleWithCurve(card.CardObject.transform, SpawnInEffect.SetScale, curve, SpawnInEffect.Delay));
+                StartCoroutine(card.ScaleWithCurve(card.CardObject.transform, SpawnInEffect.SetScale, curve, SpawnInEffect.Delay));
             }
             else
             {
@@ -217,8 +204,20 @@ public class GameManager : MonoBehaviour
             }
         }
         _cardGrid.enabled = false;
-    }
 
+        StartCoroutine(HideAllCards());
+    }
+    private IEnumerator HideAllCards()
+    {
+        yield return new WaitForSeconds(1f);
+        foreach (CardItem card in _spawnedCards.Values)
+        {
+            yield return new WaitForSeconds(0.01f);
+
+            card.Flip(MatchEffect);
+        }
+        _cardGrid.enabled = false;
+    }
     private void AdjustGridLayoutGroup()
     {
         // Calculate cell size based on grid dimensions
@@ -254,9 +253,10 @@ public class GameManager : MonoBehaviour
                 return new GridSize { Rows = 2, Columns = 2 };
         }
     }
+
     #endregion
     #region Triggers & Scaling Curve
-    private void AddEventTriggers(Card card)
+    private void AddEventTriggers(CardItem card)
     {
         EventTrigger trigger = card.EventTrigger;
         if (trigger == null)
@@ -282,97 +282,87 @@ public class GameManager : MonoBehaviour
         pointerClick.callback.AddListener((eventData) => { OnPointerClick(card); });
         trigger.triggers.Add(pointerClick);
     }
-    private void OnPointerEnter(Card card)
+    private void OnPointerEnter(CardItem card)
     {
-        if (card.IsClicked)
+        if (!card.IsClicked)
         {
             AnimationCurve curve = _animationManager.GetAnimationCurve(SpawnInEffect.SelectedEffect);
-            StartCoroutine(ScaleWithCurve(card.CardObject.transform, PointerEnterEffect.SetScale, curve, PointerEnterEffect.Delay));
+            StartCoroutine(card.ScaleWithCurve(card.CardObject.transform, PointerEnterEffect.SetScale, curve, PointerEnterEffect.Delay));
             card.CardObject.transform.SetSiblingIndex(card.CardObject.transform.parent.childCount - 1);
             CheckCards();
         }
     }
-
-    private void OnPointerExit(Card card)
+    private void OnPointerExit(CardItem card)
     {
-        if (card.IsClicked)
+        if (!card.IsClicked)
         {
             AnimationCurve curve = _animationManager.GetAnimationCurve(SpawnInEffect.SelectedEffect);
-            StartCoroutine(ScaleWithCurve(card.CardObject.transform, PointerExitEffect.SetScale, curve, PointerExitEffect.Delay));
+            StartCoroutine(card.ScaleWithCurve(card.CardObject.transform, PointerExitEffect.SetScale, curve, PointerExitEffect.Delay));
             card.CardObject.transform.SetSiblingIndex(card.CardObject.transform.parent.childCount - 1);
             CheckCards();
         }
     }
-
-    private void OnPointerClick(Card card)
+    private void OnPointerClick(CardItem card)
     {
         AnimationCurve curve = _animationManager.GetAnimationCurve(SpawnInEffect.SelectedEffect);
-        StartCoroutine(ScaleWithCurve(card.CardObject.transform, ClickEffect.SetScale, curve, ClickEffect.Delay));
+        StartCoroutine(card.ScaleWithCurve(card.CardObject.transform, ClickEffect.SetScale, curve, ClickEffect.Delay));
         card.CardObject.transform.SetSiblingIndex(card.CardObject.transform.parent.childCount - 1);
+        card.IsClicked = !card.IsClicked;
         _selectedCards.Add(card);
-        CheckCards();
+        CheckCards(true);
     }
-
-private void CheckCards()
-{
-    _cardsClicked++;
-    if (_cardsClicked == 2)
+    private void CheckCards(bool? hasClicked = false)
     {
-        Card[] cards = _selectedCards.ToArray();
-        if (cards.Length == 2) // Ensure there are exactly two cards selected
+        if (hasClicked == true)
         {
-            if (cards[0].CardImage.color == cards[1].CardImage.color)
+            _cardsClicked++;
+            Debug.Log(_cardsClicked);
+        }
+
+        if (_cardsClicked == 2)
+        {
+            CardItem[] cards = _selectedCards.ToArray();
+            if (cards.Length == 2) // Ensure there are exactly two cards selected
             {
-                for (int i = 0; i < cards.Length; i++)
+                if (cards[0].CardImage.color == cards[1].CardImage.color)
                 {
-                    Card cardSelected = cards[i];
-                    cardSelected.Matched = true;
-                    cardSelected.CardObject.GetComponent<Selectable>().enabled = false;
-                    AnimationCurve curve = _animationManager.GetAnimationCurve(MatchEffect.SelectedEffect);
-                    StartCoroutine(ScaleWithCurve(cardSelected.CardObject.transform, MatchEffect.SetScale, curve, MatchEffect.Delay));
+                    for (int i = 0; i < cards.Length; i++)
+                    {
+                        cards[i].HasMatched = true;
+                        cards[i].CardObject.GetComponent<Selectable>().enabled = false;
+                        AnimationCurve curve = _animationManager.GetAnimationCurve(MatchEffect.SelectedEffect);
+                        StartCoroutine(cards[i].ScaleWithCurve(cards[i].CardObject.transform, MatchEffect.SetScale, curve, MatchEffect.Delay));
+                        Debug.Log("Cards Matched!");
+                    }
+                }
+                else
+                {
+                    // Cards don't match, flip them back
+                    for (int i = 0; i < cards.Length; i++)
+                    {
+                        cards[i].Flip(FlipEffect);
+                        AnimationCurve curve = _animationManager.GetAnimationCurve(PointerExitEffect.SelectedEffect);
+                        StartCoroutine(cards[i].ScaleWithCurve(cards[i].CardObject.transform, PointerExitEffect.SetScale, curve, PointerExitEffect.Delay));
+                    }
+                    Debug.Log("Didnt match, flipping back");
+                    _cardsClicked = 0;
                 }
             }
             else
             {
-                // Cards don't match, flip them back
+                // If there are not exactly two cards selected, flip them back
                 for (int i = 0; i < cards.Length; i++)
                 {
-                    //cards[i].Flip();
+                    cards[i].Flip(FlipEffect);
+                    AnimationCurve curve = _animationManager.GetAnimationCurve(PointerExitEffect.SelectedEffect);
+                    StartCoroutine(cards[i].ScaleWithCurve(cards[i].CardObject.transform, PointerExitEffect.SetScale, curve, PointerExitEffect.Delay));
                 }
+                Debug.Log("more than two cards selected, flipping back");
+                _cardsClicked = 0;
             }
+            // Reset the number of clicked cards          
+            _selectedCards.Clear();
         }
-        else
-        {
-            // If there are not exactly two cards selected, flip them back
-            for (int i = 0; i < cards.Length; i++)
-            {
-                //cards[i].Flip();
-            }
-        }
-        // Reset the number of clicked cards
-        _cardsClicked = 0;
-        _selectedCards.Clear();
     }
-}
-
-
-    private IEnumerator ScaleWithCurve(Transform targetTransform, Vector3 targetScale, AnimationCurve curve, float duration)
-    {
-        float timeElapsed = 0f;
-        Vector3 initialScale = targetTransform.localScale;
-
-        while (timeElapsed < duration)
-        {
-            float t = timeElapsed / duration;
-            float curveValue = curve.Evaluate(t);
-            targetTransform.localScale = Vector3.Lerp(initialScale, targetScale, curveValue);
-            timeElapsed += Time.deltaTime;
-            yield return null;
-        }
-
-        // Ensure the target scale is set correctly at the end
-        targetTransform.localScale = targetScale;
-    }
-
     #endregion
 }
