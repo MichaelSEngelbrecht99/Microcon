@@ -400,10 +400,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 593341734}
     m_Modifications:
-    - target: {fileID: 7234088038805685857, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
       propertyPath: m_Name
       value: S_Card (23)
@@ -499,28 +495,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7250052426676543681, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
   m_PrefabInstance: {fileID: 165398470}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &165398472 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-  m_PrefabInstance: {fileID: 165398470}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &165398473
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 165398472}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls: []
 --- !u!1001 &177420112
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -528,10 +502,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 593341734}
     m_Modifications:
-    - target: {fileID: 7234088038805685857, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
       propertyPath: m_Name
       value: S_Card (24)
@@ -627,28 +597,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7250052426676543681, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
   m_PrefabInstance: {fileID: 177420112}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &177420114 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-  m_PrefabInstance: {fileID: 177420112}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &177420115
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 177420114}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls: []
 --- !u!1001 &231105977
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -656,10 +604,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 593341734}
     m_Modifications:
-    - target: {fileID: 7234088038805685857, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
       propertyPath: m_Name
       value: S_Card (26)
@@ -755,28 +699,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7250052426676543681, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
   m_PrefabInstance: {fileID: 231105977}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &231105979 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-  m_PrefabInstance: {fileID: 231105977}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &231105980
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 231105979}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls: []
 --- !u!1001 &285579987
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1235,21 +1157,21 @@ MonoBehaviour:
   SelectedGameMode: 1
   SelectedDifficulty: 1
   AvailableColors:
-  - {r: 1, g: 0, b: 0, a: 0}
-  - {r: 1, g: 0.3823665, b: 0, a: 0}
-  - {r: 1, g: 0.96567404, b: 0, a: 0}
-  - {r: 0.20015311, g: 1, b: 0, a: 0}
-  - {r: 0, g: 1, b: 0.54320717, a: 0}
-  - {r: 0, g: 0.7149544, b: 1, a: 0}
-  - {r: 0, g: 0.118125916, b: 1, a: 0}
-  - {r: 0.4867382, g: 0, b: 1, a: 0}
-  - {r: 0.7806244, g: 0, b: 1, a: 0}
-  - {r: 1, g: 0, b: 0.84308815, a: 0}
-  - {r: 0.6981132, g: 0.6981132, b: 0.6981132, a: 0}
-  - {r: 0.3490566, g: 0.3490566, b: 0.3490566, a: 0}
-  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 1, g: 0.3823665, b: 0, a: 1}
+  - {r: 1, g: 0.96567404, b: 0, a: 1}
+  - {r: 0.20015311, g: 1, b: 0, a: 1}
+  - {r: 0, g: 1, b: 0.54320717, a: 1}
+  - {r: 0, g: 0.7149544, b: 1, a: 1}
+  - {r: 0, g: 0.118125916, b: 1, a: 1}
+  - {r: 0.4867382, g: 0, b: 1, a: 1}
+  - {r: 0.7806244, g: 0, b: 1, a: 1}
+  - {r: 1, g: 0, b: 0.84308815, a: 1}
+  - {r: 0.6981132, g: 0.6981132, b: 0.6981132, a: 1}
+  - {r: 0.3490566, g: 0.3490566, b: 0.3490566, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
   _cardPrefab: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-  _cellPadding: 0
+  _cellPadding: 35
   _cardGrid: {fileID: 593341735}
   CardSpawnIn:
     m_PersistentCalls:
@@ -1258,115 +1180,23 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   PointerEnterEffect:
-    SelectedEffect:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 2
-        outSlope: 2
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    Delay: 0.3
+    SelectedEffect: 0
+    Delay: 0.1
     SetScale: {x: 1.05, y: 1.05, z: 1.05}
     EffectClip: {fileID: 0}
   PointerExitEffect:
-    SelectedEffect:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 2
-        outSlope: 2
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    Delay: 0.3
+    SelectedEffect: 0
+    Delay: 0.1
     SetScale: {x: 1, y: 1, z: 1}
     EffectClip: {fileID: 0}
   ClickEffect:
-    SelectedEffect:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 2
-        outSlope: 2
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    Delay: 0.5
-    SetScale: {x: 1.1, y: 1.1, z: 1.1}
+    SelectedEffect: 0
+    Delay: 0.1
+    SetScale: {x: 1.2, y: 1.2, z: 1.2}
     EffectClip: {fileID: 0}
   SpawnInEffect:
-    SelectedEffect:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 2
-        outSlope: 2
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    Delay: 1
+    SelectedEffect: 0
+    Delay: 0.15
     SetScale: {x: 1, y: 1, z: 1}
     EffectClip: {fileID: 0}
   _totalCards: 0
@@ -1771,7 +1601,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -121.4}
-  m_SizeDelta: {x: 900, y: 775}
+  m_SizeDelta: {x: 800, y: 775}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &593341735
 MonoBehaviour:
@@ -1842,10 +1672,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 593341734}
     m_Modifications:
-    - target: {fileID: 7234088038805685857, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
       propertyPath: m_Name
       value: S_Card (16)
@@ -1941,28 +1767,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7250052426676543681, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
   m_PrefabInstance: {fileID: 596040561}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &596040563 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-  m_PrefabInstance: {fileID: 596040561}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &596040564
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 596040563}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls: []
 --- !u!1 &633177877
 GameObject:
   m_ObjectHideFlags: 0
@@ -2099,6 +1903,770 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 633177877}
   m_CullTransparentMesh: 1
+--- !u!1 &650786952
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 650786953}
+  - component: {fileID: 650786954}
+  m_Layer: 0
+  m_Name: Animation_Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &650786953
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 650786952}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1951289556}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &650786954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 650786952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5dcd8ad9636f3846b5647858406f307, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Linear:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  Clerp:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  Spring:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  EaseInQuad:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  EaseOutQuad:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  EaseInOutQuad:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  EaseInCubic:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  EaseOutCubic:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  EaseInOutCubic:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  EaseInQuart:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  EaseOutQuart:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  EaseInOutQuart:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  EaseInQuint:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  EaseOutQuint:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  EaseInOutQuint:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  EaseInSine:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  EaseOutSine:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  EaseInOutSine:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  EaseInExpo:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  EaseOutExpo:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  EaseInOutExpo:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  EaseInCirc:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  EaseOutCirc:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  EaseInOutCirc:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  EaseInBack:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  EaseOutBack:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  EaseInOutBack:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  EaseInBounce:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  EaseOutBounce:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  EaseInOutBounce:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &656749421
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2106,10 +2674,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 593341734}
     m_Modifications:
-    - target: {fileID: 7234088038805685857, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
       propertyPath: m_Name
       value: S_Card (19)
@@ -2205,28 +2769,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7250052426676543681, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
   m_PrefabInstance: {fileID: 656749421}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &656749423 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-  m_PrefabInstance: {fileID: 656749421}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &656749424
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 656749423}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls: []
 --- !u!1 &665741708
 GameObject:
   m_ObjectHideFlags: 0
@@ -2371,6 +2913,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 690689551}
+  - component: {fileID: 690689552}
   m_Layer: 0
   m_Name: Asset_Swap_Manager
   m_TagString: Untagged
@@ -2393,6 +2936,18 @@ Transform:
   m_Father: {fileID: 1951289556}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &690689552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 690689550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85da6872451b1224a8fae1c7d28db722, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &692885710
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2400,10 +2955,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 593341734}
     m_Modifications:
-    - target: {fileID: 7234088038805685857, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
       propertyPath: m_Name
       value: S_Card (6)
@@ -2499,28 +3050,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7250052426676543681, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
   m_PrefabInstance: {fileID: 692885710}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &692885712 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-  m_PrefabInstance: {fileID: 692885710}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &692885713
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 692885712}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls: []
 --- !u!1001 &758528567
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2528,10 +3057,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 593341734}
     m_Modifications:
-    - target: {fileID: 7234088038805685857, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
       propertyPath: m_Name
       value: S_Card (15)
@@ -2627,28 +3152,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7250052426676543681, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
   m_PrefabInstance: {fileID: 758528567}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &758528569 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-  m_PrefabInstance: {fileID: 758528567}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &758528570
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 758528569}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls: []
 --- !u!1001 &772611108
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2656,10 +3159,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 593341734}
     m_Modifications:
-    - target: {fileID: 7234088038805685857, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
       propertyPath: m_Name
       value: S_Card (7)
@@ -2755,28 +3254,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7250052426676543681, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
   m_PrefabInstance: {fileID: 772611108}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &772611110 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-  m_PrefabInstance: {fileID: 772611108}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &772611111
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 772611110}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls: []
 --- !u!1 &779989187
 GameObject:
   m_ObjectHideFlags: 0
@@ -2984,10 +3461,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 593341734}
     m_Modifications:
-    - target: {fileID: 7234088038805685857, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
       propertyPath: m_Name
       value: S_Card (14)
@@ -3083,28 +3556,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7250052426676543681, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
   m_PrefabInstance: {fileID: 846451471}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &846451473 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-  m_PrefabInstance: {fileID: 846451471}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &846451474
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 846451473}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls: []
 --- !u!1 &891459255
 GameObject:
   m_ObjectHideFlags: 0
@@ -3248,10 +3699,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 593341734}
     m_Modifications:
-    - target: {fileID: 7234088038805685857, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
       propertyPath: m_Name
       value: S_Card (2)
@@ -3347,28 +3794,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7250052426676543681, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
   m_PrefabInstance: {fileID: 918501851}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &918501853 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-  m_PrefabInstance: {fileID: 918501851}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &918501854
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 918501853}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls: []
 --- !u!1001 &932085993
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3376,10 +3801,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 593341734}
     m_Modifications:
-    - target: {fileID: 7234088038805685857, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
       propertyPath: m_Name
       value: S_Card (22)
@@ -3475,28 +3896,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7250052426676543681, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
   m_PrefabInstance: {fileID: 932085993}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &932085995 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-  m_PrefabInstance: {fileID: 932085993}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &932085996
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 932085995}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls: []
 --- !u!1 &940761042
 GameObject:
   m_ObjectHideFlags: 0
@@ -3640,10 +4039,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 593341734}
     m_Modifications:
-    - target: {fileID: 7234088038805685857, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
       propertyPath: m_Name
       value: S_Card (4)
@@ -3739,28 +4134,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7250052426676543681, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
   m_PrefabInstance: {fileID: 1028821792}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1028821794 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-  m_PrefabInstance: {fileID: 1028821792}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1028821795
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1028821794}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls: []
 --- !u!1001 &1071570519
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3768,10 +4141,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 593341734}
     m_Modifications:
-    - target: {fileID: 7234088038805685857, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
       propertyPath: m_Name
       value: S_Card (8)
@@ -3867,28 +4236,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7250052426676543681, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
   m_PrefabInstance: {fileID: 1071570519}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1071570521 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-  m_PrefabInstance: {fileID: 1071570519}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1071570522
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1071570521}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls: []
 --- !u!1 &1082571987
 GameObject:
   m_ObjectHideFlags: 0
@@ -4011,10 +4358,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 593341734}
     m_Modifications:
-    - target: {fileID: 7234088038805685857, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
       propertyPath: m_Name
       value: S_Card (11)
@@ -4110,28 +4453,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7250052426676543681, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
   m_PrefabInstance: {fileID: 1186660111}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1186660113 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-  m_PrefabInstance: {fileID: 1186660111}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1186660114
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1186660113}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls: []
 --- !u!1 &1211282929
 GameObject:
   m_ObjectHideFlags: 0
@@ -4307,6 +4628,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1236696382}
+  - component: {fileID: 1236696383}
   m_Layer: 0
   m_Name: Score_Manager
   m_TagString: Untagged
@@ -4329,6 +4651,18 @@ Transform:
   m_Father: {fileID: 1951289556}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1236696383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1236696381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f14dd5b53a2a52b4bb4d7447244c0b14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1259526115
 GameObject:
   m_ObjectHideFlags: 0
@@ -4633,10 +4967,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 593341734}
     m_Modifications:
-    - target: {fileID: 7234088038805685857, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
       propertyPath: m_Name
       value: S_Card (13)
@@ -4732,28 +5062,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7250052426676543681, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
   m_PrefabInstance: {fileID: 1334416945}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1334416947 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-  m_PrefabInstance: {fileID: 1334416945}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1334416948
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1334416947}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls: []
 --- !u!1 &1356608806
 GameObject:
   m_ObjectHideFlags: 0
@@ -4885,6 +5193,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1447048099}
+  - component: {fileID: 1447048100}
   m_Layer: 0
   m_Name: Language_Manager
   m_TagString: Untagged
@@ -4907,6 +5216,18 @@ Transform:
   m_Father: {fileID: 1951289556}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1447048100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1447048098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 687d08cd81ec8744e8db44cc6c30ef4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1463210177
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4914,10 +5235,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 593341734}
     m_Modifications:
-    - target: {fileID: 7234088038805685857, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
       propertyPath: m_Name
       value: S_Card (29)
@@ -5013,28 +5330,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7250052426676543681, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
   m_PrefabInstance: {fileID: 1463210177}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1463210179 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-  m_PrefabInstance: {fileID: 1463210177}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1463210180
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1463210179}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls: []
 --- !u!1 &1488024747
 GameObject:
   m_ObjectHideFlags: 0
@@ -5240,10 +5535,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 593341734}
     m_Modifications:
-    - target: {fileID: 7234088038805685857, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
       propertyPath: m_Name
       value: S_Card (12)
@@ -5339,28 +5630,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7250052426676543681, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
   m_PrefabInstance: {fileID: 1522631138}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1522631140 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-  m_PrefabInstance: {fileID: 1522631138}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1522631141
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1522631140}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls: []
 --- !u!1 &1547321782
 GameObject:
   m_ObjectHideFlags: 0
@@ -5823,10 +6092,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 593341734}
     m_Modifications:
-    - target: {fileID: 7234088038805685857, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
       propertyPath: m_Name
       value: S_Card (27)
@@ -5922,28 +6187,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7250052426676543681, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
   m_PrefabInstance: {fileID: 1629248238}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1629248240 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-  m_PrefabInstance: {fileID: 1629248238}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1629248241
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1629248240}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls: []
 --- !u!1 &1647971302
 GameObject:
   m_ObjectHideFlags: 0
@@ -5953,6 +6196,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1647971303}
+  - component: {fileID: 1647971304}
   m_Layer: 0
   m_Name: Platform_Manager
   m_TagString: Untagged
@@ -5975,6 +6219,18 @@ Transform:
   m_Father: {fileID: 1951289556}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1647971304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1647971302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d541f6e6f9bfa1346886add9513b3197, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1663942108
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5982,10 +6238,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 593341734}
     m_Modifications:
-    - target: {fileID: 7234088038805685857, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
       propertyPath: m_Name
       value: S_Card (21)
@@ -6081,28 +6333,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7250052426676543681, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
   m_PrefabInstance: {fileID: 1663942108}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1663942110 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-  m_PrefabInstance: {fileID: 1663942108}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1663942111
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1663942110}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls: []
 --- !u!1 &1669122310
 GameObject:
   m_ObjectHideFlags: 0
@@ -6186,10 +6416,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 593341734}
     m_Modifications:
-    - target: {fileID: 7234088038805685857, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
       propertyPath: m_Name
       value: S_Card (18)
@@ -6285,28 +6511,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7250052426676543681, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
   m_PrefabInstance: {fileID: 1685026472}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1685026474 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-  m_PrefabInstance: {fileID: 1685026472}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1685026475
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1685026474}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls: []
 --- !u!1 &1718528468
 GameObject:
   m_ObjectHideFlags: 0
@@ -6466,10 +6670,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 593341734}
     m_Modifications:
-    - target: {fileID: 7234088038805685857, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
       propertyPath: m_Name
       value: S_Card (9)
@@ -6565,28 +6765,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7250052426676543681, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
   m_PrefabInstance: {fileID: 1774623772}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1774623774 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-  m_PrefabInstance: {fileID: 1774623772}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1774623775
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1774623774}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls: []
 --- !u!1001 &1780675748
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6594,10 +6772,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 593341734}
     m_Modifications:
-    - target: {fileID: 7234088038805685857, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
       propertyPath: m_Name
       value: S_Card (17)
@@ -6693,28 +6867,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7250052426676543681, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
   m_PrefabInstance: {fileID: 1780675748}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1780675750 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-  m_PrefabInstance: {fileID: 1780675748}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1780675751
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1780675750}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls: []
 --- !u!1001 &1786623868
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6722,10 +6874,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 593341734}
     m_Modifications:
-    - target: {fileID: 7234088038805685857, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
       propertyPath: m_Name
       value: S_Card (10)
@@ -6821,28 +6969,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7250052426676543681, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
   m_PrefabInstance: {fileID: 1786623868}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1786623870 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-  m_PrefabInstance: {fileID: 1786623868}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1786623871
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1786623870}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls: []
 --- !u!1 &1800034686
 GameObject:
   m_ObjectHideFlags: 0
@@ -6985,10 +7111,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 593341734}
     m_Modifications:
-    - target: {fileID: 7234088038805685857, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
       propertyPath: m_Name
       value: S_Card (25)
@@ -7084,28 +7206,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7250052426676543681, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
   m_PrefabInstance: {fileID: 1813453848}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1813453850 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-  m_PrefabInstance: {fileID: 1813453848}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1813453851
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1813453850}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls: []
 --- !u!1 &1839479203
 GameObject:
   m_ObjectHideFlags: 0
@@ -7528,10 +7628,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 593341734}
     m_Modifications:
-    - target: {fileID: 7234088038805685857, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
       propertyPath: m_Name
       value: S_Card (20)
@@ -7627,28 +7723,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7250052426676543681, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
   m_PrefabInstance: {fileID: 1880571742}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1880571744 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-  m_PrefabInstance: {fileID: 1880571742}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1880571745
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1880571744}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls: []
 --- !u!1 &1934620220
 GameObject:
   m_ObjectHideFlags: 0
@@ -7818,6 +7892,7 @@ Transform:
   - {fileID: 1236696382}
   - {fileID: 1447048099}
   - {fileID: 690689551}
+  - {fileID: 650786953}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7828,10 +7903,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 593341734}
     m_Modifications:
-    - target: {fileID: 7234088038805685857, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
       propertyPath: m_Name
       value: S_Card (5)
@@ -7927,28 +7998,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7250052426676543681, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
   m_PrefabInstance: {fileID: 1958201223}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1958201225 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-  m_PrefabInstance: {fileID: 1958201223}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1958201226
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1958201225}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls: []
 --- !u!1001 &2009211934
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7956,10 +8005,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 593341734}
     m_Modifications:
-    - target: {fileID: 7234088038805685857, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
       propertyPath: m_Name
       value: S_Card (28)
@@ -8055,28 +8100,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7250052426676543681, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
   m_PrefabInstance: {fileID: 2009211934}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2009211936 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-  m_PrefabInstance: {fileID: 2009211934}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2009211937
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2009211936}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls: []
 --- !u!1 &2021018639
 GameObject:
   m_ObjectHideFlags: 0
@@ -8152,10 +8175,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 593341734}
     m_Modifications:
-    - target: {fileID: 7234088038805685857, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
       propertyPath: m_Name
       value: S_Card (3)
@@ -8251,28 +8270,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7250052426676543681, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
   m_PrefabInstance: {fileID: 2071479442}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2071479444 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7250052426676543680, guid: 2fd8e2a4e61baaf44ae86d1619f67393, type: 3}
-  m_PrefabInstance: {fileID: 2071479442}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2071479445
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2071479444}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls: []
 --- !u!1001 &2088655732
 PrefabInstance:
   m_ObjectHideFlags: 0

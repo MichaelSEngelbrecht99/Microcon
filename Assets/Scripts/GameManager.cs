@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using static AnimationManager;
 
 public class GameManager : MonoBehaviour
 {
@@ -31,14 +32,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TweenEffect PointerExitEffect;
     [SerializeField] private TweenEffect ClickEffect;
     [SerializeField] private TweenEffect SpawnInEffect;
+    [SerializeField] private TweenEffect MatchEffect;
     #endregion
     #region Debugging Items & Variables
     [Space(14)]
     [Header("Debugging List")]
+    [SerializeField] private int _cardsClicked;
     [SerializeField] private int _totalCards;
     [SerializeField] private int _rows;
     [SerializeField] private int _columns;
-
+    private AnimationManager _animationManager;
     [SerializeField] private List<Card> _Cards;
     public List<Card> Cards => _Cards;
     [SerializeField] private List<Card> _selectedCards;
@@ -79,6 +82,7 @@ public class GameManager : MonoBehaviour
         public int Id;
         public Vector2 GridPosition;
         public bool IsMine;
+        public bool IsClicked;
         public bool Matched;
         public Image CardImage;
         public RectTransform CardRectTransform;
@@ -86,17 +90,23 @@ public class GameManager : MonoBehaviour
         public GameObject CardObject;
     }
 
-    [Serializable]
-    public struct TweenEffect
-    {
-        public AnimationCurve SelectedEffect;
-        public float Delay;
-        public Vector3 SetScale;
-        public AudioClip EffectClip;
-    }
     #endregion
+    private static GameManager _instance;
+    public static GameManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<GameManager>();
+            }
+
+            return _instance;
+        }
+    }
     void Start()
     {
+        _animationManager = AnimationManager.Instance;
         StartCoroutine(Initialize());
     }
 
@@ -108,13 +118,16 @@ public class GameManager : MonoBehaviour
         StartCoroutine(StartGame());
     }
 
+#nullable enable
     private IEnumerator SetupGrid(GameModes gameMode, GameDifficulties gameDifficulty, List<Card>? cards = null)
     {
+        _cardGrid.enabled = true;
         GridSize gridSize = GetGridSize(gameDifficulty);
         _rows = gridSize.Rows;
         _columns = gridSize.Columns;
 
         int allowedColors = (_rows * _columns) / 2;
+        // use AvalableColors to get and set the colors, and there should only be two matchinc colors
 
         _totalCards = _rows * _columns;
 
@@ -131,7 +144,7 @@ public class GameManager : MonoBehaviour
         {
             for (int col = 0; col < _columns; col++)
             {
-                yield return new WaitForSeconds(0.03f);
+
                 GameObject cardGameObject = Instantiate(_cardPrefab, _cardGrid.transform);
                 RectTransform cardRectTransform = cardGameObject.GetComponent<RectTransform>();
                 cardRectTransform.localScale = Vector3.zero; // Set local scale to zero
@@ -180,25 +193,37 @@ public class GameManager : MonoBehaviour
             default:
                 break;
         }
+        yield return new WaitForSeconds(0.03f);
     }
 
     private IEnumerator StartGame()
     {
+
         yield return new WaitForSeconds(SpawnInEffect.Delay);
 
         foreach (Card card in _spawnedCards.Values)
         {
-            yield return new WaitForSeconds(0.05f);
-            Debug.Log(card.Id);
-            StartCoroutine(ScaleWithCurve(card.CardObject.transform, SpawnInEffect.SetScale, SpawnInEffect.SelectedEffect, SpawnInEffect.Delay));
+            yield return new WaitForSeconds(0.01f);
+
+            // Get the animation curve based on the selected effect
+            AnimationCurve curve = _animationManager.GetAnimationCurve(SpawnInEffect.SelectedEffect);
+            if (curve != null)
+            {
+                StartCoroutine(ScaleWithCurve(card.CardObject.transform, SpawnInEffect.SetScale, curve, SpawnInEffect.Delay));
+            }
+            else
+            {
+                Debug.LogError("Animation curve not defined for selected effect: " + SpawnInEffect.SelectedEffect);
+            }
         }
+        _cardGrid.enabled = false;
     }
 
     private void AdjustGridLayoutGroup()
     {
         // Calculate cell size based on grid dimensions
-        float cellSizeX = (_cardGrid.GetComponent<RectTransform>().rect.width / _columns) + _cellPadding;
-        float cellSizeY = (_cardGrid.GetComponent<RectTransform>().rect.height / _rows) + _cellPadding;
+        float cellSizeX = (_cardGrid.GetComponent<RectTransform>().rect.width / _columns) - _cellPadding;
+        float cellSizeY = (_cardGrid.GetComponent<RectTransform>().rect.height / _rows) - _cellPadding;
         // Use the smaller dimension as the cell size
         float cellSize = Mathf.Min(cellSizeX, cellSizeY);
         // Ensure cell size is valid
@@ -259,18 +284,78 @@ public class GameManager : MonoBehaviour
     }
     private void OnPointerEnter(Card card)
     {
-        StartCoroutine(ScaleWithCurve(card.CardObject.transform, PointerEnterEffect.SetScale, PointerEnterEffect.SelectedEffect, PointerEnterEffect.Delay));
+        if (card.IsClicked)
+        {
+            AnimationCurve curve = _animationManager.GetAnimationCurve(SpawnInEffect.SelectedEffect);
+            StartCoroutine(ScaleWithCurve(card.CardObject.transform, PointerEnterEffect.SetScale, curve, PointerEnterEffect.Delay));
+            card.CardObject.transform.SetSiblingIndex(card.CardObject.transform.parent.childCount - 1);
+            CheckCards();
+        }
     }
 
     private void OnPointerExit(Card card)
     {
-        StartCoroutine(ScaleWithCurve(card.CardObject.transform, PointerExitEffect.SetScale, PointerExitEffect.SelectedEffect, PointerExitEffect.Delay));
+        if (card.IsClicked)
+        {
+            AnimationCurve curve = _animationManager.GetAnimationCurve(SpawnInEffect.SelectedEffect);
+            StartCoroutine(ScaleWithCurve(card.CardObject.transform, PointerExitEffect.SetScale, curve, PointerExitEffect.Delay));
+            card.CardObject.transform.SetSiblingIndex(card.CardObject.transform.parent.childCount - 1);
+            CheckCards();
+        }
     }
 
     private void OnPointerClick(Card card)
     {
-        StartCoroutine(ScaleWithCurve(card.CardObject.transform, ClickEffect.SetScale, ClickEffect.SelectedEffect, ClickEffect.Delay));
+        AnimationCurve curve = _animationManager.GetAnimationCurve(SpawnInEffect.SelectedEffect);
+        StartCoroutine(ScaleWithCurve(card.CardObject.transform, ClickEffect.SetScale, curve, ClickEffect.Delay));
+        card.CardObject.transform.SetSiblingIndex(card.CardObject.transform.parent.childCount - 1);
+        _selectedCards.Add(card);
+        CheckCards();
     }
+
+private void CheckCards()
+{
+    _cardsClicked++;
+    if (_cardsClicked == 2)
+    {
+        Card[] cards = _selectedCards.ToArray();
+        if (cards.Length == 2) // Ensure there are exactly two cards selected
+        {
+            if (cards[0].CardImage.color == cards[1].CardImage.color)
+            {
+                for (int i = 0; i < cards.Length; i++)
+                {
+                    Card cardSelected = cards[i];
+                    cardSelected.Matched = true;
+                    cardSelected.CardObject.GetComponent<Selectable>().enabled = false;
+                    AnimationCurve curve = _animationManager.GetAnimationCurve(MatchEffect.SelectedEffect);
+                    StartCoroutine(ScaleWithCurve(cardSelected.CardObject.transform, MatchEffect.SetScale, curve, MatchEffect.Delay));
+                }
+            }
+            else
+            {
+                // Cards don't match, flip them back
+                for (int i = 0; i < cards.Length; i++)
+                {
+                    //cards[i].Flip();
+                }
+            }
+        }
+        else
+        {
+            // If there are not exactly two cards selected, flip them back
+            for (int i = 0; i < cards.Length; i++)
+            {
+                //cards[i].Flip();
+            }
+        }
+        // Reset the number of clicked cards
+        _cardsClicked = 0;
+        _selectedCards.Clear();
+    }
+}
+
+
     private IEnumerator ScaleWithCurve(Transform targetTransform, Vector3 targetScale, AnimationCurve curve, float duration)
     {
         float timeElapsed = 0f;
