@@ -8,6 +8,7 @@ using System;
 
 public class SaveManager : MonoBehaviour
 {
+        private bool isLoading = false;
     private GameManager _gameManager;
     private static SaveManager _instance;
     public static SaveManager Instance
@@ -30,8 +31,14 @@ public class SaveManager : MonoBehaviour
         _gameManager = GameManager.Instance;
     }
 
+
+
     public IEnumerator LoadGame()
     {
+        if (isLoading) yield break; // Exit if loading is already in progress
+
+        isLoading = true; // Set loading flag to true
+
         if (File.Exists(savePath))
         {
             BinaryFormatter formatter = new BinaryFormatter();
@@ -58,8 +65,9 @@ public class SaveManager : MonoBehaviour
             Debug.LogWarning("No save file found.");
         }
 
-        yield return null;
+        isLoading = false; // Reset loading flag
     }
+
 
     public void SaveGame()
     {

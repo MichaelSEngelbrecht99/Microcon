@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TweenEffect MatchEffect;
     [SerializeField] private TweenEffect FlipEffect;
     public UnityEvent GameStarting;
+    public UnityEvent GameLoaded;
     #endregion
     #region Debugging Items & Variables
     [Space(14)]
@@ -55,6 +56,7 @@ public class GameManager : MonoBehaviour
     public List<CardItem> MatchedCards;
     public List<CardItemData> CardsData;
     public List<CardItemData> MatchedCardsData;
+    private bool isLoading;
     #endregion
     #region Game Enums
     public enum GameModes
@@ -113,7 +115,11 @@ public class GameManager : MonoBehaviour
 
     public void LoadGame()
     {
-        StartCoroutine(FromSaveInitialize());
+        if (!isLoading) // Check if loading is not already in progress
+        {
+            isLoading = true; // Set loading flag to true
+            StartCoroutine(FromSaveInitialize());
+        }
     }
 
     public void SetGameMode(int gameMode)
@@ -167,8 +173,11 @@ public class GameManager : MonoBehaviour
     }
     public IEnumerator FromSaveInitialize()
     {
-        yield return _saveManager.LoadGame();
+        yield return StartCoroutine(_saveManager.LoadGame());
+        isLoading = false;
+        GameLoaded.Invoke();
         yield return SetupGrid(SelectedGameMode, SelectedDifficulty, true);
+
     }
     public IEnumerator Initialize()
     {
@@ -204,6 +213,7 @@ public class GameManager : MonoBehaviour
 #nullable enable
     private IEnumerator SetupGrid(GameModes gameMode, GameDifficulties gameDifficulty, bool fromSave)
     {
+        Debug.Log("Getting Grid");
         _cardGrid.enabled = true;
         GridSize gridSize = GetGridSize(gameDifficulty);
         _rows = gridSize.Rows;
@@ -390,6 +400,10 @@ public class GameManager : MonoBehaviour
     }
     private void OnPointerEnter(CardItem card)
     {
+        if (!GameIsRunning)
+        {
+            return;
+        }
         if (!card.HasClicked && card.IsClickable)
         {
             AnimationCurve curve = _animationManager.GetAnimationCurve(SpawnInEffect.SelectedEffect);
@@ -400,6 +414,10 @@ public class GameManager : MonoBehaviour
     }
     private void OnPointerExit(CardItem card)
     {
+        if (!GameIsRunning)
+        {
+            return;
+        }
         if (!card.HasClicked && card.IsClickable)
         {
             AnimationCurve curve = _animationManager.GetAnimationCurve(SpawnInEffect.SelectedEffect);
@@ -410,6 +428,10 @@ public class GameManager : MonoBehaviour
     }
     private void OnPointerClick(CardItem card)
     {
+        if (!GameIsRunning)
+        {
+            return;
+        }
         if (!card.HasClicked && card.IsClickable)
         {
             _scoreManager.Flips++;
