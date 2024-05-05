@@ -218,8 +218,38 @@ public class GameManager : MonoBehaviour
         GridSize gridSize = GetGridSize(gameDifficulty);
         _rows = gridSize.Rows;
         _columns = gridSize.Columns;
-
         _totalCards = _rows * _columns;
+
+        // Create a list of available sprite indexes
+        List<int> availableIndexes = new List<int>();
+        for (int i = 0; i < AvailableIcons.Length; i++)
+        {
+            availableIndexes.Add(i);
+        }
+
+        // Shuffle the available sprite indexes
+        ShuffleList(availableIndexes);
+
+        // Determine the number of pairs needed
+        int numberOfPairs = _totalCards / 2;
+
+        // Get random indexes for each pair
+        List<int> randomIndexes = new List<int>();
+        for (int i = 0; i < numberOfPairs; i++)
+        {
+            // Pick a random sprite index from the available indexes
+            int randomIndex = availableIndexes[i % availableIndexes.Count];
+
+            // Add the random index twice to represent the pair
+            randomIndexes.Add(randomIndex);
+            randomIndexes.Add(randomIndex);
+
+            // Remove the used index from the available indexes list
+            availableIndexes.Remove(randomIndex);
+        }
+
+        // Shuffle the random indexes
+        ShuffleList(randomIndexes);
 
         ResetGame(fromSave);
 
@@ -245,6 +275,7 @@ public class GameManager : MonoBehaviour
                     card.CardImage = cardGameObject.transform.GetChild(0).GetChild(1).GetChild(0).GetComponent<Image>();
                     card.CardRectTransform = cardRectTransform;
                     card.EventTrigger = cardGameObject.GetComponent<EventTrigger>();
+                    card.CardSpriteIndex = randomIndexes[cardIndex];
                     card.CardImage.sprite = AvailableIcons[card.CardSpriteIndex];
                     card.GridPosition = new Vector2(row, col);
                     card.AnimationManager = _animationManager;
@@ -271,6 +302,7 @@ public class GameManager : MonoBehaviour
                         card.ScoreManager = _scoreManager;
                         card.GridPosition = new Vector2(row, col);
                         card.CardSelectable = cardGameObject.GetComponent<Selectable>();
+                        card.CardSpriteIndex = randomIndexes[cardIndex];
                         card.CardImage.sprite = AvailableIcons[card.CardSpriteIndex];
                         if (card.Hidden)
                         {
@@ -281,7 +313,6 @@ public class GameManager : MonoBehaviour
                         cardIndex++;
                     }
                 }
-
             }
         }
 
@@ -289,6 +320,7 @@ public class GameManager : MonoBehaviour
         AdjustGridLayoutGroup();
         StartCoroutine(StartGame(fromSave));
     }
+
     private IEnumerator StartGame(bool fromSave)
     {
 
@@ -310,7 +342,6 @@ public class GameManager : MonoBehaviour
                 Debug.LogError("Animation curve not defined for selected effect: " + SpawnInEffect.SelectedEffect);
             }
         }
-        _cardGrid.enabled = false;
 
         if (!fromSave)
         {
@@ -330,9 +361,58 @@ public class GameManager : MonoBehaviour
         {
             _spawnedCards[i].IsClickable = true;
         }
+        yield return new WaitForSeconds(1f);
+        _cardGrid.enabled = false;
+        yield return new WaitForSeconds(0.1f);
+        Shuffle();
+        yield return new WaitForSeconds(0.1f);
+        _cardGrid.enabled = true;
+        yield return new WaitForSeconds(0.1f);
         _cardGrid.enabled = false;
         GameIsRunning = true;
         GameStarting.Invoke();
+    }
+
+    // Shuffle the children of the given parent transform
+    public void Shuffle()
+    {
+        // Get the number of child transforms
+        int childCount = _cardGrid.transform.childCount;
+
+        // Create a list to hold the child transforms
+        List<Transform> childList = new List<Transform>();
+
+        // Add all child transforms to the list
+        for (int i = 0; i < childCount; i++)
+        {
+            Transform child = _cardGrid.transform.GetChild(i);
+            childList.Add(child);
+        }
+
+        // Shuffle the list
+        ShuffleList(childList);
+
+        // Reorder the child transforms according to the shuffled list
+        for (int i = 0; i < childCount; i++)
+        {
+            childList[i].SetSiblingIndex(i);
+        }
+    }
+
+
+    // Method to shuffle a list
+    private void ShuffleList<T>(List<T> list)
+    {
+        System.Random rand = new System.Random();
+        int n = list.Count;
+        while (n > 1)
+        {
+            n--;
+            int k = rand.Next(n + 1);
+            T value = list[k];
+            list[k] = list[n];
+            list[n] = value;
+        }
     }
     private void AdjustGridLayoutGroup()
     {
@@ -370,6 +450,30 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public List<int>? PickUniqueRandomNumbers(int min, int max, int count)
+    {
+        if (max - min + 1 < count)
+        {
+            Debug.LogError("Count must be less than or equal to the range of numbers.");
+            return null;
+        }
+
+        List<int> randomNumbers = new List<int>();
+        HashSet<int> pickedNumbers = new HashSet<int>();
+        System.Random rand = new System.Random();
+
+        while (randomNumbers.Count < count)
+        {
+            int randomNumber = rand.Next(min, max + 1);
+            if (!pickedNumbers.Contains(randomNumber))
+            {
+                randomNumbers.Add(randomNumber);
+                pickedNumbers.Add(randomNumber);
+            }
+        }
+
+        return randomNumbers;
+    }
     #endregion
     #region Triggers & Scaling Curve
     private void AddEventTriggers(CardItem card)
@@ -409,7 +513,7 @@ public class GameManager : MonoBehaviour
             AnimationCurve curve = _animationManager.GetAnimationCurve(SpawnInEffect.SelectedEffect);
             StartCoroutine(card.ScaleWithCurve(card.CardObject.transform, PointerEnterEffect.SetScale, curve, PointerEnterEffect.Delay));
             card.CardObject.transform.SetSiblingIndex(card.CardObject.transform.parent.childCount - 1);
-            CheckCards(card.IsClickable);
+            StartCoroutine(CheckCardsWithDelay(card.IsClickable, false));
         }
     }
     private void OnPointerExit(CardItem card)
@@ -423,7 +527,7 @@ public class GameManager : MonoBehaviour
             AnimationCurve curve = _animationManager.GetAnimationCurve(SpawnInEffect.SelectedEffect);
             StartCoroutine(card.ScaleWithCurve(card.CardObject.transform, PointerExitEffect.SetScale, curve, PointerExitEffect.Delay));
             card.CardObject.transform.SetSiblingIndex(card.CardObject.transform.parent.childCount - 1);
-            CheckCards(card.IsClickable);
+            StartCoroutine(CheckCardsWithDelay(card.IsClickable, false));
         }
     }
     private void OnPointerClick(CardItem card)
@@ -432,11 +536,13 @@ public class GameManager : MonoBehaviour
         {
             return;
         }
+
         if (!card.HasClicked && card.IsClickable)
         {
             _scoreManager.Flips++;
             _scoreManager.UpdateScoreInformation();
         }
+
         if (!card.HasMatched && !card.HasClicked && card.IsClickable)
         {
             AnimationCurve curve = _animationManager.GetAnimationCurve(SpawnInEffect.SelectedEffect);
@@ -445,15 +551,19 @@ public class GameManager : MonoBehaviour
             card.HasClicked = !card.HasClicked;
             card.Flip(FlipEffect);
             SelectedCards.Add(card);
+
+            // Call CheckCardsWithDelay coroutine
+            StartCoroutine(CheckCardsWithDelay(card.IsClickable, true));
         }
-        CheckCards(card.IsClickable, true);
     }
-    private void CheckCards(bool IsClickable, bool? hasClicked = false)
+
+    private IEnumerator CheckCardsWithDelay(bool IsClickable, bool? hasClicked = false)
     {
         if (!IsClickable)
         {
-            return;
+            yield break;
         }
+
         if (hasClicked == true)
         {
             _cardsClicked++;
@@ -461,17 +571,19 @@ public class GameManager : MonoBehaviour
 
         if (_cardsClicked == 2)
         {
+            yield return new WaitForSeconds(0.35f); // Wait for the flip animation to complete
+
             CardItem[] cards = SelectedCards.ToArray();
+
             if (cards.Length == 2) // Ensure there are exactly two cards selected
             {
-                if (cards[0].CardImage.color == cards[1].CardImage.color)
+                if (cards[0].CardImage.sprite == cards[1].CardImage.sprite)
                 {
                     for (int i = 0; i < cards.Length; i++)
                     {
                         cards[i].DisableCard();
                         AnimationCurve curve = _animationManager.GetAnimationCurve(MatchEffect.SelectedEffect);
                         StartCoroutine(cards[i].ScaleWithCurve(cards[i].CardObject.transform, MatchEffect.SetScale, curve, MatchEffect.Delay));
-
                     }
                     _cardsMatched++;
                     _scoreManager.Matches++;
@@ -505,6 +617,7 @@ public class GameManager : MonoBehaviour
                 }
                 Debug.Log("more than two cards selected, flipping back");
             }
+
             // Reset the number of clicked cards          
             _cardsClicked = 0;
             SelectedCards.Clear();
