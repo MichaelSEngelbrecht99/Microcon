@@ -308,6 +308,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(card.ScaleWithCurve(card.CardObject.transform, ClickEffect.SetScale, curve, ClickEffect.Delay));
         card.CardObject.transform.SetSiblingIndex(card.CardObject.transform.parent.childCount - 1);
         card.IsClicked = !card.IsClicked;
+        card.Flip(FlipEffect);
         _selectedCards.Add(card);
         CheckCards(true);
     }
@@ -329,7 +330,7 @@ public class GameManager : MonoBehaviour
                     for (int i = 0; i < cards.Length; i++)
                     {
                         cards[i].HasMatched = true;
-                        cards[i].CardObject.GetComponent<Selectable>().enabled = false;
+                        cards[i].CardObject.GetComponent<Selectable>().enabled = false;                     
                         AnimationCurve curve = _animationManager.GetAnimationCurve(MatchEffect.SelectedEffect);
                         StartCoroutine(cards[i].ScaleWithCurve(cards[i].CardObject.transform, MatchEffect.SetScale, curve, MatchEffect.Delay));
                         Debug.Log("Cards Matched!");
@@ -340,12 +341,12 @@ public class GameManager : MonoBehaviour
                     // Cards don't match, flip them back
                     for (int i = 0; i < cards.Length; i++)
                     {
+                        cards[i].IsClicked = false; // Reset the clicked state
                         cards[i].Flip(FlipEffect);
-                        AnimationCurve curve = _animationManager.GetAnimationCurve(PointerExitEffect.SelectedEffect);
-                        StartCoroutine(cards[i].ScaleWithCurve(cards[i].CardObject.transform, PointerExitEffect.SetScale, curve, PointerExitEffect.Delay));
+                        AnimationCurve exitCurve = _animationManager.GetAnimationCurve(PointerExitEffect.SelectedEffect);
+                        StartCoroutine(cards[i].ScaleWithCurve(cards[i].CardObject.transform, PointerExitEffect.SetScale, exitCurve, PointerExitEffect.Delay));
                     }
-                    Debug.Log("Didnt match, flipping back");
-                    _cardsClicked = 0;
+                    Debug.Log("Didn't match, flipping back");
                 }
             }
             else
@@ -353,16 +354,18 @@ public class GameManager : MonoBehaviour
                 // If there are not exactly two cards selected, flip them back
                 for (int i = 0; i < cards.Length; i++)
                 {
+                    cards[i].IsClicked = false; // Reset the clicked state
                     cards[i].Flip(FlipEffect);
-                    AnimationCurve curve = _animationManager.GetAnimationCurve(PointerExitEffect.SelectedEffect);
-                    StartCoroutine(cards[i].ScaleWithCurve(cards[i].CardObject.transform, PointerExitEffect.SetScale, curve, PointerExitEffect.Delay));
+                    AnimationCurve exitCurve = _animationManager.GetAnimationCurve(PointerExitEffect.SelectedEffect);
+                    StartCoroutine(cards[i].ScaleWithCurve(cards[i].CardObject.transform, PointerExitEffect.SetScale, exitCurve, PointerExitEffect.Delay));
                 }
                 Debug.Log("more than two cards selected, flipping back");
-                _cardsClicked = 0;
             }
             // Reset the number of clicked cards          
+            _cardsClicked = 0;
             _selectedCards.Clear();
         }
     }
+
     #endregion
 }
