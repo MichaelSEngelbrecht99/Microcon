@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     [Header("Game Configuration")]
     public GameModes SelectedGameMode;
     public GameDifficulties SelectedDifficulty;
-    public Color[] AvailableColors;
+    public Sprite[] AvailableIcons;
     [Space(14)]
 
     [Header("Card Prefab & Transform")]
@@ -49,12 +49,12 @@ public class GameManager : MonoBehaviour
     private AudioManager _audioManager;
     private ScoreManager _scoreManager;
     private TimeTrackerManager _timeTrackerManager;
-    [SerializeField] private List<CardItem> _cards;
-    public List<CardItem> Cards => _cards;
-    [SerializeField] private List<CardItem> _selectedCards;
-    public List<CardItem> SelectedCards => _selectedCards;
-    [SerializeField] private List<CardItem> _matchedCards;
-    public List<CardItem> MatchedCards => _matchedCards;
+    private SaveManager _saveManager;
+    public List<CardItem> Cards;
+    public List<CardItem> SelectedCards;
+    public List<CardItem> MatchedCards;
+    public List<CardItemData> CardsData;
+    public List<CardItemData> MatchedCardsData;
     #endregion
     #region Game Enums
     public enum GameModes
@@ -103,7 +103,58 @@ public class GameManager : MonoBehaviour
         _animationManager = AnimationManager.Instance;
         _scoreManager = ScoreManager.Instance;
         _timeTrackerManager = TimeTrackerManager.Instance;
+        _saveManager = SaveManager.Instance;
+    }
+
+    public void NewGame()
+    {
         StartCoroutine(Initialize());
+    }
+
+    public void LoadGame()
+    {
+        StartCoroutine(FromSaveInitialize());
+    }
+
+    public void SetGameMode(int gameMode)
+    {
+        switch (gameMode)
+        {
+            case 0:
+                SelectedGameMode = GameModes.Normal;
+                break;
+            case 1:
+                SelectedGameMode = GameModes.Endless;
+                break;
+            case 2:
+                SelectedGameMode = GameModes.TimeBased;
+                break;
+            case 3:
+                SelectedGameMode = GameModes.MineSweeper;
+                break;
+        }
+    }
+
+    public void SetDifficulty(int gameDifficulty)
+    {
+        switch (gameDifficulty)
+        {
+            case 0:
+                SelectedDifficulty = GameDifficulties.Easy;
+                break;
+            case 1:
+                SelectedDifficulty = GameDifficulties.Normal;
+                break;
+            case 2:
+                SelectedDifficulty = GameDifficulties.Medium;
+                break;
+            case 3:
+                SelectedDifficulty = GameDifficulties.Hard;
+                break;
+            case 4:
+                SelectedDifficulty = GameDifficulties.Extreme;
+                break;
+        }
     }
 
     #region Initialization
@@ -114,50 +165,53 @@ public class GameManager : MonoBehaviour
         StopAllCoroutines();
         StartCoroutine(Initialize());
     }
+    public IEnumerator FromSaveInitialize()
+    {
+        yield return _saveManager.LoadGame();
+        yield return SetupGrid(SelectedGameMode, SelectedDifficulty, true);
+    }
     public IEnumerator Initialize()
     {
-        yield return SetupGrid(SelectedGameMode, SelectedDifficulty);
-        AdjustGridLayoutGroup();
-        StartCoroutine(StartGame());
+        yield return SetupGrid(SelectedGameMode, SelectedDifficulty, false);
     }
 
-    public void Reset()
+    public void ResetGame(bool fromSave)
     {
         GameIsRunning = false;
         foreach (Transform child in _cardGrid.transform)
         {
             Destroy(child.gameObject);
         }
-        _cards.Clear();
-        _selectedCards.Clear();
-        _matchedCards.Clear();
+        if (!fromSave)
+        {
+            Cards.Clear();
+            SelectedCards.Clear();
+            MatchedCards.Clear();
 
-        // Check if _spawnedCards is null before clearing it
-        if (_spawnedCards != null)
-        {
-            _spawnedCards.Clear();
-        }
-        else
-        {
-            // Log a message if _spawnedCards is null
-            Debug.LogWarning("_spawnedCards is null in GameManager.Reset()");
+            // Check if _spawnedCards is null before clearing it
+            if (_spawnedCards != null)
+            {
+                _spawnedCards.Clear();
+            }
+            else
+            {
+                // Log a message if _spawnedCards is null
+                Debug.LogWarning("_spawnedCards is null in GameManager.Reset()");
+            }
         }
     }
 
 #nullable enable
-    private IEnumerator SetupGrid(GameModes gameMode, GameDifficulties gameDifficulty, List<CardItem>? cards = null)
+    private IEnumerator SetupGrid(GameModes gameMode, GameDifficulties gameDifficulty, bool fromSave)
     {
         _cardGrid.enabled = true;
         GridSize gridSize = GetGridSize(gameDifficulty);
         _rows = gridSize.Rows;
         _columns = gridSize.Columns;
 
-        int allowedColors = (_rows * _columns) / 2;
-        // use AvailableColors to get and set the colors, and there should only be two matching colors
-
         _totalCards = _rows * _columns;
 
-        Reset();
+        ResetGame(fromSave);
 
         // Spawn cards
         _spawnedCards = new Dictionary<int, CardItem>();
@@ -166,63 +220,66 @@ public class GameManager : MonoBehaviour
         {
             for (int col = 0; col < _columns; col++)
             {
+                if (!fromSave)
+                {
+                    GameObject cardGameObject = Instantiate(_cardPrefab, _cardGrid.transform);
+                    RectTransform cardRectTransform = cardGameObject.GetComponent<RectTransform>();
+                    cardRectTransform.localScale = Vector3.zero; // Set local scale to zero
+                    CardItem card = cardGameObject.GetComponent<CardItem>();
+                    card.Id = cardIndex;
+                    card.IsMine = false;
+                    card.Hidden = false;
+                    card.HasMatched = false;
+                    card.CardObject = cardGameObject;
+                    card.IsClickable = false;
+                    card.CardImage = cardGameObject.transform.GetChild(0).GetChild(1).GetChild(0).GetComponent<Image>();
+                    card.CardRectTransform = cardRectTransform;
+                    card.EventTrigger = cardGameObject.GetComponent<EventTrigger>();
+                    card.CardImage.sprite = AvailableIcons[card.CardSpriteIndex];
+                    card.GridPosition = new Vector2(row, col);
+                    card.AnimationManager = _animationManager;
+                    card.AudioManager = _audioManager;
+                    card.ScoreManager = _scoreManager;
+                    card.CardSelectable = cardGameObject.GetComponent<Selectable>();
+                    _spawnedCards.Add(card.Id, card);
+                    Cards.Add(card);
+                    AddEventTriggers(card);
+                    cardIndex++;
+                }
+                else
+                {
+                    foreach (CardItem card in Cards)
+                    {
+                        GameObject cardGameObject = Instantiate(_cardPrefab, _cardGrid.transform);
+                        RectTransform cardRectTransform = cardGameObject.GetComponent<RectTransform>();
+                        cardRectTransform.localScale = Vector3.one;
+                        card.CardImage = cardGameObject.transform.GetChild(0).GetChild(1).GetChild(0).GetComponent<Image>();
+                        card.CardRectTransform = cardRectTransform;
+                        card.EventTrigger = cardGameObject.GetComponent<EventTrigger>();
+                        card.AnimationManager = _animationManager;
+                        card.AudioManager = _audioManager;
+                        card.ScoreManager = _scoreManager;
+                        card.GridPosition = new Vector2(row, col);
+                        card.CardSelectable = cardGameObject.GetComponent<Selectable>();
+                        card.CardImage.sprite = AvailableIcons[card.CardSpriteIndex];
+                        if (card.Hidden)
+                        {
+                            card.CardImage.gameObject.SetActive(false);
+                        }
+                        _spawnedCards.Add(card.Id, card);
+                        AddEventTriggers(card);
+                        cardIndex++;
+                    }
+                }
 
-                GameObject cardGameObject = Instantiate(_cardPrefab, _cardGrid.transform);
-                RectTransform cardRectTransform = cardGameObject.GetComponent<RectTransform>();
-                cardRectTransform.localScale = Vector3.zero; // Set local scale to zero
-                CardItem card = cardGameObject.GetComponent<CardItem>();
-                card.Id = cardIndex;
-                card.IsMine = false;
-                card.Hidden = false;
-                card.HasMatched = false;
-                card.CardObject = cardGameObject;
-                card.IsClickable = false;
-                card.CardImage = cardGameObject.transform.GetChild(0).GetChild(1).GetChild(0).GetComponent<Image>();
-                card.CardRectTransform = cardRectTransform;
-                card.EventTrigger = cardGameObject.GetComponent<EventTrigger>();
-                card.GridPosition = new Vector2(row, col);
-                card.AnimationManager = _animationManager;
-                card.AudioManager = _audioManager;
-                card.ScoreManager = _scoreManager;
-                card.CardSelectable = cardGameObject.GetComponent<Selectable>();
-                _spawnedCards.Add(card.Id, card);
-                _cards.Add(card);
-                AddEventTriggers(card);
-
-                cardIndex++;
             }
         }
 
-        // If cards are provided for loading, update the grid accordingly
-        if (cards != null && cards.Count == _totalCards)
-        {
-            for (int i = 0; i < _totalCards; i++)
-            {
-                _spawnedCards[i] = cards[i];
-            }
-        }
-
-        // Setup specific game mode
-        switch (gameMode)
-        {
-            case GameModes.Normal:
-                // Implement setup for normal mode
-                break;
-            case GameModes.Endless:
-                // Implement setup for endless mode
-                break;
-            case GameModes.TimeBased:
-                // Implement setup for time-based mode
-                break;
-            case GameModes.MineSweeper:
-                // Implement setup for minesweeper mode
-                break;
-            default:
-                break;
-        }
         yield return new WaitForSeconds(0.4f);
+        AdjustGridLayoutGroup();
+        StartCoroutine(StartGame(fromSave));
     }
-    private IEnumerator StartGame()
+    private IEnumerator StartGame(bool fromSave)
     {
 
         yield return new WaitForSeconds(SpawnInEffect.Delay);
@@ -235,7 +292,6 @@ public class GameManager : MonoBehaviour
             AnimationCurve curve = _animationManager.GetAnimationCurve(SpawnInEffect.SelectedEffect);
             if (curve != null)
             {
-
                 _audioManager.Play(card.FlippingSounds[0], AudioManager.Sources.Effects);
                 StartCoroutine(card.ScaleWithCurve(card.CardObject.transform, SpawnInEffect.SetScale, curve, SpawnInEffect.Delay));
             }
@@ -246,7 +302,10 @@ public class GameManager : MonoBehaviour
         }
         _cardGrid.enabled = false;
 
-        StartCoroutine(HideAllCards());
+        if (!fromSave)
+        {
+            StartCoroutine(HideAllCards());
+        }
     }
     private IEnumerator HideAllCards()
     {
@@ -363,7 +422,7 @@ public class GameManager : MonoBehaviour
             card.CardObject.transform.SetSiblingIndex(card.CardObject.transform.parent.childCount - 1);
             card.HasClicked = !card.HasClicked;
             card.Flip(FlipEffect);
-            _selectedCards.Add(card);
+            SelectedCards.Add(card);
         }
         CheckCards(card.IsClickable, true);
     }
@@ -380,7 +439,7 @@ public class GameManager : MonoBehaviour
 
         if (_cardsClicked == 2)
         {
-            CardItem[] cards = _selectedCards.ToArray();
+            CardItem[] cards = SelectedCards.ToArray();
             if (cards.Length == 2) // Ensure there are exactly two cards selected
             {
                 if (cards[0].CardImage.color == cards[1].CardImage.color)
@@ -426,11 +485,10 @@ public class GameManager : MonoBehaviour
             }
             // Reset the number of clicked cards          
             _cardsClicked = 0;
-            _selectedCards.Clear();
+            SelectedCards.Clear();
             _scoreManager.UpdateScoreInformation();
         }
     }
-
     public void CheckWinningState()
     {
         // Setup specific game mode

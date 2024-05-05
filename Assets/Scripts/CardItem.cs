@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using static AnimationManager;
 using System.Collections;
+using System;
 
 public class CardItem : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class CardItem : MonoBehaviour
     public bool HasMatched;
     public bool Hidden;
     public Image CardImage;
+    public int CardSpriteIndex;
     public RectTransform CardRectTransform;
     public EventTrigger EventTrigger;
     public GameObject CardObject;
@@ -22,6 +24,10 @@ public class CardItem : MonoBehaviour
     public ScoreManager ScoreManager;
     public Selectable CardSelectable;
     public AudioClip[] FlippingSounds;
+    public CardItemData GetCardData()
+    {
+        return new CardItemData(this);
+    }
 
 #nullable enable
     public void Flip(TweenEffect tweenEffect)
