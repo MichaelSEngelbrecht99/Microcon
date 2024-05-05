@@ -20,20 +20,21 @@ public class GameManager : MonoBehaviour
     [Header("Card Prefab & Transform")]
     [SerializeField] private GameObject _cardPrefab;
     [SerializeField] private float _cellPadding;
-    private Dictionary<int, CardItem> _spawnedCards;
+    [SerializeField] private Dictionary<int, CardItem> _spawnedCards = new Dictionary<int, CardItem>();
+
     [Space(14)]
     [Header("Card Prefab & Transform")]
     [SerializeField] private GridLayoutGroup _cardGrid;
 
     [Header("Tween Effects & Events")]
-    public UnityEvent CardSpawnIn;
-    public UnityEvent CardSpawnOut;
+    public UnityEvent GameWon;
     [SerializeField] private TweenEffect PointerEnterEffect;
     [SerializeField] private TweenEffect PointerExitEffect;
     [SerializeField] private TweenEffect ClickEffect;
     [SerializeField] private TweenEffect SpawnInEffect;
     [SerializeField] private TweenEffect MatchEffect;
     [SerializeField] private TweenEffect FlipEffect;
+    public UnityEvent GameStarting;
     #endregion
     #region Debugging Items & Variables
     [Space(14)]
@@ -42,7 +43,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int _totalCards;
     [SerializeField] private int _rows;
     [SerializeField] private int _columns;
+    [SerializeField] private int _cardsMatched;
+
     private AnimationManager _animationManager;
+    private AudioManager _audioManager;
+    private ScoreManager _scoreManager;
     [SerializeField] private List<CardItem> _cards;
     public List<CardItem> Cards => _cards;
     [SerializeField] private List<CardItem> _selectedCards;
@@ -93,16 +98,46 @@ public class GameManager : MonoBehaviour
     #endregion
     void Start()
     {
+        _audioManager = AudioManager.Instance;
         _animationManager = AnimationManager.Instance;
+        _scoreManager = ScoreManager.Instance;
         StartCoroutine(Initialize());
     }
 
     #region Initialization
+
+    public void Restart()
+    {
+        StopAllCoroutines();
+        StartCoroutine(Initialize());
+    }
     public IEnumerator Initialize()
     {
         yield return SetupGrid(SelectedGameMode, SelectedDifficulty);
         AdjustGridLayoutGroup();
         StartCoroutine(StartGame());
+    }
+
+    public void Reset()
+    {
+        foreach (Transform child in _cardGrid.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        _cards.Clear();
+        _selectedCards.Clear();
+        _matchedCards.Clear();
+
+        // Check if _spawnedCards is null before clearing it
+        if (_spawnedCards != null)
+        {
+            _spawnedCards.Clear();
+        }
+        else
+        {
+            // Log a message if _spawnedCards is null
+            Debug.LogWarning("_spawnedCards is null in GameManager.Reset()");
+        }
     }
 
 #nullable enable
@@ -118,11 +153,7 @@ public class GameManager : MonoBehaviour
 
         _totalCards = _rows * _columns;
 
-        // Clear previous cards if any
-        foreach (Transform child in _cardGrid.transform)
-        {
-            Destroy(child.gameObject);
-        }
+        Reset();
 
         // Spawn cards
         _spawnedCards = new Dictionary<int, CardItem>();
@@ -141,11 +172,15 @@ public class GameManager : MonoBehaviour
                 card.Hidden = false;
                 card.HasMatched = false;
                 card.CardObject = cardGameObject;
+                card.IsClickable = false;
                 card.CardImage = cardGameObject.transform.GetChild(0).GetChild(1).GetChild(0).GetComponent<Image>();
                 card.CardRectTransform = cardRectTransform;
                 card.EventTrigger = cardGameObject.GetComponent<EventTrigger>();
                 card.GridPosition = new Vector2(row, col);
                 card.AnimationManager = _animationManager;
+                card.AudioManager = _audioManager;
+                card.ScoreManager = _scoreManager;
+                card.CardSelectable = cardGameObject.GetComponent<Selectable>();
                 _spawnedCards.Add(card.Id, card);
                 _cards.Add(card);
                 AddEventTriggers(card);
@@ -181,7 +216,7 @@ public class GameManager : MonoBehaviour
             default:
                 break;
         }
-        yield return new WaitForSeconds(0.03f);
+        yield return new WaitForSeconds(0.4f);
     }
     private IEnumerator StartGame()
     {
@@ -190,12 +225,14 @@ public class GameManager : MonoBehaviour
 
         foreach (CardItem card in _spawnedCards.Values)
         {
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSeconds(0.1f);
 
             // Get the animation curve based on the selected effect
             AnimationCurve curve = _animationManager.GetAnimationCurve(SpawnInEffect.SelectedEffect);
             if (curve != null)
             {
+
+                _audioManager.Play(card.FlippingSounds[0], AudioManager.Sources.Effects);
                 StartCoroutine(card.ScaleWithCurve(card.CardObject.transform, SpawnInEffect.SetScale, curve, SpawnInEffect.Delay));
             }
             else
@@ -210,13 +247,18 @@ public class GameManager : MonoBehaviour
     private IEnumerator HideAllCards()
     {
         yield return new WaitForSeconds(1f);
-        foreach (CardItem card in _spawnedCards.Values)
+        for (int i = 0; i < _spawnedCards.Values.Count; i++)
         {
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSeconds(0.15f);
 
-            card.Flip(MatchEffect);
+            _spawnedCards[i].Flip(MatchEffect);
+        }
+        for (int i = 0; i < _spawnedCards.Values.Count; i++)
+        {
+            _spawnedCards[i].IsClickable = true;
         }
         _cardGrid.enabled = false;
+        GameStarting.Invoke();
     }
     private void AdjustGridLayoutGroup()
     {
@@ -284,40 +326,51 @@ public class GameManager : MonoBehaviour
     }
     private void OnPointerEnter(CardItem card)
     {
-        if (!card.IsClicked)
+        if (!card.HasClicked && card.IsClickable)
         {
             AnimationCurve curve = _animationManager.GetAnimationCurve(SpawnInEffect.SelectedEffect);
             StartCoroutine(card.ScaleWithCurve(card.CardObject.transform, PointerEnterEffect.SetScale, curve, PointerEnterEffect.Delay));
             card.CardObject.transform.SetSiblingIndex(card.CardObject.transform.parent.childCount - 1);
-            CheckCards();
+            CheckCards(card.IsClickable);
         }
     }
     private void OnPointerExit(CardItem card)
     {
-        if (!card.IsClicked)
+        if (!card.HasClicked && card.IsClickable)
         {
             AnimationCurve curve = _animationManager.GetAnimationCurve(SpawnInEffect.SelectedEffect);
             StartCoroutine(card.ScaleWithCurve(card.CardObject.transform, PointerExitEffect.SetScale, curve, PointerExitEffect.Delay));
             card.CardObject.transform.SetSiblingIndex(card.CardObject.transform.parent.childCount - 1);
-            CheckCards();
+            CheckCards(card.IsClickable);
         }
     }
     private void OnPointerClick(CardItem card)
     {
-        AnimationCurve curve = _animationManager.GetAnimationCurve(SpawnInEffect.SelectedEffect);
-        StartCoroutine(card.ScaleWithCurve(card.CardObject.transform, ClickEffect.SetScale, curve, ClickEffect.Delay));
-        card.CardObject.transform.SetSiblingIndex(card.CardObject.transform.parent.childCount - 1);
-        card.IsClicked = !card.IsClicked;
-        card.Flip(FlipEffect);
-        _selectedCards.Add(card);
-        CheckCards(true);
+        if (!card.HasClicked && card.IsClickable)
+        {
+            _scoreManager.Flips++;
+            _scoreManager.UpdateScoreInformation();
+        }
+        if (!card.HasMatched && !card.HasClicked && card.IsClickable)
+        {
+            AnimationCurve curve = _animationManager.GetAnimationCurve(SpawnInEffect.SelectedEffect);
+            StartCoroutine(card.ScaleWithCurve(card.CardObject.transform, ClickEffect.SetScale, curve, ClickEffect.Delay));
+            card.CardObject.transform.SetSiblingIndex(card.CardObject.transform.parent.childCount - 1);
+            card.HasClicked = !card.HasClicked;
+            card.Flip(FlipEffect);
+            _selectedCards.Add(card);
+        }
+        CheckCards(card.IsClickable, true);
     }
-    private void CheckCards(bool? hasClicked = false)
+    private void CheckCards(bool IsClickable, bool? hasClicked = false)
     {
+        if (!IsClickable)
+        {
+            return;
+        }
         if (hasClicked == true)
         {
             _cardsClicked++;
-            Debug.Log(_cardsClicked);
         }
 
         if (_cardsClicked == 2)
@@ -329,24 +382,29 @@ public class GameManager : MonoBehaviour
                 {
                     for (int i = 0; i < cards.Length; i++)
                     {
-                        cards[i].HasMatched = true;
-                        cards[i].CardObject.GetComponent<Selectable>().enabled = false;                     
+                        cards[i].DisableCard();
                         AnimationCurve curve = _animationManager.GetAnimationCurve(MatchEffect.SelectedEffect);
                         StartCoroutine(cards[i].ScaleWithCurve(cards[i].CardObject.transform, MatchEffect.SetScale, curve, MatchEffect.Delay));
-                        Debug.Log("Cards Matched!");
+
                     }
+                    _cardsMatched++;
+                    _scoreManager.Matches++;
+                    _scoreManager.ScoreMultiplier++;
+                    _scoreManager.AddScore();
+                    CheckWinningState();
                 }
                 else
                 {
                     // Cards don't match, flip them back
                     for (int i = 0; i < cards.Length; i++)
                     {
-                        cards[i].IsClicked = false; // Reset the clicked state
+                        cards[i].HasClicked = false; // Reset the clicked state
                         cards[i].Flip(FlipEffect);
                         AnimationCurve exitCurve = _animationManager.GetAnimationCurve(PointerExitEffect.SelectedEffect);
                         StartCoroutine(cards[i].ScaleWithCurve(cards[i].CardObject.transform, PointerExitEffect.SetScale, exitCurve, PointerExitEffect.Delay));
                     }
                     Debug.Log("Didn't match, flipping back");
+                    _scoreManager.ScoreMultiplier = 1;
                 }
             }
             else
@@ -354,7 +412,7 @@ public class GameManager : MonoBehaviour
                 // If there are not exactly two cards selected, flip them back
                 for (int i = 0; i < cards.Length; i++)
                 {
-                    cards[i].IsClicked = false; // Reset the clicked state
+                    cards[i].HasClicked = false; // Reset the clicked state
                     cards[i].Flip(FlipEffect);
                     AnimationCurve exitCurve = _animationManager.GetAnimationCurve(PointerExitEffect.SelectedEffect);
                     StartCoroutine(cards[i].ScaleWithCurve(cards[i].CardObject.transform, PointerExitEffect.SetScale, exitCurve, PointerExitEffect.Delay));
@@ -364,6 +422,32 @@ public class GameManager : MonoBehaviour
             // Reset the number of clicked cards          
             _cardsClicked = 0;
             _selectedCards.Clear();
+            _scoreManager.UpdateScoreInformation();
+        }
+    }
+
+    public void CheckWinningState()
+    {
+        // Setup specific game mode
+        switch (SelectedGameMode)
+        {
+            case GameModes.Normal:
+                if (_scoreManager.Matches == (_totalCards / 2))
+                {
+                    _audioManager.Cheer();
+                }
+                break;
+            case GameModes.Endless:
+                _audioManager.Cheer();
+                break;
+            case GameModes.TimeBased:
+                _audioManager.Cheer();
+                break;
+            case GameModes.MineSweeper:
+                _audioManager.Cheer();
+                break;
+            default:
+                break;
         }
     }
 

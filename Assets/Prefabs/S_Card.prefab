@@ -330,6 +330,11 @@ MonoBehaviour:
   EventTrigger: {fileID: 0}
   CardObject: {fileID: 0}
   AnimationManager: {fileID: 0}
+  AudioManager: {fileID: 0}
+  CardSelectable: {fileID: 0}
+  FlippingSounds:
+  - {fileID: 8300000, guid: 09f016eb5d0e6624cb6add451fea221f, type: 3}
+  - {fileID: 8300000, guid: 1fff178e08cdb194396af294e3145f1c, type: 3}
 --- !u!114 &285579997
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -6,10 +6,11 @@ public class TimeTrackerManager : MonoBehaviour
 {
     public TextMeshProUGUI TimeText;
     private int _time; // Time in seconds
-
+    private GameManager _gameManager;
     private void Start()
     {
-        InvokeRepeating(nameof(IncreaseTime), 1, 1);
+        _gameManager = GameManager.Instance;
+        _gameManager.GameStarting.AddListener(() => InvokeRepeating(nameof(IncreaseTime), 1, 1));
     }
 
     private void IncreaseTime()

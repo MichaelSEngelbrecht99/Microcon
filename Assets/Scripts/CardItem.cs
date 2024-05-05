@@ -9,7 +9,8 @@ public class CardItem : MonoBehaviour
     public int Id;
     public Vector2 GridPosition;
     public bool IsMine;
-    public bool IsClicked;
+    public bool IsClickable;
+    public bool HasClicked;
     public bool HasMatched;
     public bool Hidden;
     public Image CardImage;
@@ -17,14 +18,22 @@ public class CardItem : MonoBehaviour
     public EventTrigger EventTrigger;
     public GameObject CardObject;
     public AnimationManager AnimationManager;
+    public AudioManager AudioManager;
+    public ScoreManager ScoreManager;
+    public Selectable CardSelectable;
+    public AudioClip[] FlippingSounds;
+
+#nullable enable
     public void Flip(TweenEffect tweenEffect)
     {
         Hidden = !Hidden;
+        AudioManager.Play(Hidden ? FlippingSounds[0] : FlippingSounds[1], AudioManager.Sources.Effects);
         StartCoroutine(AnimateFlip(tweenEffect));
     }
 
     private IEnumerator AnimateFlip(TweenEffect tweenEffect)
     {
+
         AnimationCurve curve = AnimationManager.GetAnimationCurve(tweenEffect.SelectedEffect);
         float duration = tweenEffect.Delay;
 
@@ -101,5 +110,17 @@ public class CardItem : MonoBehaviour
 
         // Ensure the target scale is set correctly at the end
         targetTransform.localScale = targetScale;
+    }
+
+    public void DisableCard()
+    {
+        CardSelectable.enabled = false;
+        HasMatched = true;
+    }
+
+    public void ResetCard()
+    {
+        CardSelectable.enabled = true;
+        HasMatched = false;
     }
 }

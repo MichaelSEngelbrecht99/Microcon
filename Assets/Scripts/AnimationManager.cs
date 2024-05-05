@@ -11,7 +11,6 @@ public class AnimationManager : MonoBehaviour
         public AnimationEffects SelectedEffect;
         public float Delay;
         public Vector3 SetScale;
-        public AudioClip EffectClip;
     }
 
     [Serializable]
