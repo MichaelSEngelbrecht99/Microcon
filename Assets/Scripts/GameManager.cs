@@ -164,7 +164,10 @@ public class GameManager : MonoBehaviour
     }
 
     #region Initialization
-
+    public void StopGame()
+    {
+        StopAllCoroutines();
+    }
     public void Restart()
     {
         _timeTrackerManager.ResetTimer();
