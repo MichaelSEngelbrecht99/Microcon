@@ -7,16 +7,33 @@ public class TimeTrackerManager : MonoBehaviour
     public TextMeshProUGUI TimeText;
     private int _time; // Time in seconds
     private GameManager _gameManager;
+
+    private static TimeTrackerManager _instance;
+    public static TimeTrackerManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<TimeTrackerManager>();
+            }
+
+            return _instance;
+        }
+    }
     private void Start()
     {
         _gameManager = GameManager.Instance;
-        _gameManager.GameStarting.AddListener(() => InvokeRepeating(nameof(IncreaseTime), 1, 1));
+        InvokeRepeating(nameof(IncreaseTime), 1, 1);
     }
 
     private void IncreaseTime()
     {
-        _time++;
-        UpdateTimeText();
+        if (_gameManager.GameIsRunning)
+        {
+            _time++;
+            UpdateTimeText();
+        }
     }
 
     private void UpdateTimeText()
@@ -26,7 +43,7 @@ public class TimeTrackerManager : MonoBehaviour
         TimeText.text = formattedTime;
     }
 
-    private void ResetTimer()
+    public void ResetTimer()
     {
         _time = 0;
         UpdateTimeText();

@@ -44,10 +44,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int _rows;
     [SerializeField] private int _columns;
     [SerializeField] private int _cardsMatched;
-
+    public bool GameIsRunning;
     private AnimationManager _animationManager;
     private AudioManager _audioManager;
     private ScoreManager _scoreManager;
+    private TimeTrackerManager _timeTrackerManager;
     [SerializeField] private List<CardItem> _cards;
     public List<CardItem> Cards => _cards;
     [SerializeField] private List<CardItem> _selectedCards;
@@ -101,6 +102,7 @@ public class GameManager : MonoBehaviour
         _audioManager = AudioManager.Instance;
         _animationManager = AnimationManager.Instance;
         _scoreManager = ScoreManager.Instance;
+        _timeTrackerManager = TimeTrackerManager.Instance;
         StartCoroutine(Initialize());
     }
 
@@ -108,6 +110,7 @@ public class GameManager : MonoBehaviour
 
     public void Restart()
     {
+        _timeTrackerManager.ResetTimer();
         StopAllCoroutines();
         StartCoroutine(Initialize());
     }
@@ -120,6 +123,7 @@ public class GameManager : MonoBehaviour
 
     public void Reset()
     {
+        GameIsRunning = false;
         foreach (Transform child in _cardGrid.transform)
         {
             Destroy(child.gameObject);
@@ -249,7 +253,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         for (int i = 0; i < _spawnedCards.Values.Count; i++)
         {
-            yield return new WaitForSeconds(0.15f);
+            yield return new WaitForSeconds(0.08f);
 
             _spawnedCards[i].Flip(MatchEffect);
         }
@@ -258,6 +262,7 @@ public class GameManager : MonoBehaviour
             _spawnedCards[i].IsClickable = true;
         }
         _cardGrid.enabled = false;
+        GameIsRunning = true;
         GameStarting.Invoke();
     }
     private void AdjustGridLayoutGroup()
@@ -435,6 +440,7 @@ public class GameManager : MonoBehaviour
                 if (_scoreManager.Matches == (_totalCards / 2))
                 {
                     _audioManager.Cheer();
+                    GameIsRunning = false;
                 }
                 break;
             case GameModes.Endless:

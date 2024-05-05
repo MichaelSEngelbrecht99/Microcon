@@ -42,9 +42,9 @@ public class ScoreManager : MonoBehaviour
     }
     public void UpdateScoreInformation()
     {
-        ScoreText.text = Score.ToString();
-        ScoreMultiplierText.text = ScoreMultiplier.ToString() + "x";
-        MatchesText.text = Matches.ToString();
-        FlipsText.text = Flips.ToString();
+        ScoreText.text = Score == 0 ? "-" : Score.ToString();
+        ScoreMultiplierText.text = ScoreMultiplier == 0 ? "-" : ScoreMultiplier.ToString() + "x";
+        MatchesText.text = Matches == 0 ? "-" : Matches.ToString();
+        FlipsText.text = Flips == 0 ? "-" : Flips.ToString();
     }
 }
